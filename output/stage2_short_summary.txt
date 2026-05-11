@@ -1,0 +1,7 @@
+Stage II EDA Summary - Chicago Taxi Trips 2016
+Loaded rows: 6,903,115
+Clean rows: 5,244,558
+Date range: 2016-01-01 00:00:00 to 2016-10-31 23:45:00
+Average fare: 14.34
+Average trip distance: 3.93 miles
+ML note: do not use trip_total, tips, tolls, or extras as features for predicting fare.

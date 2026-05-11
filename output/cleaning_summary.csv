@@ -1,0 +1,8 @@
+step,rows,removed_from_previous,pct_of_loaded
+loaded,6903115,0,100.0
+fare > 0,6896580,6535,99.91
+trip_miles > 0,5272229,1624351,76.37
+trip_seconds > 0,5253755,18474,76.11
+fare <= 300,5253534,221,76.1
+trip_miles <= 100,5245738,7796,75.99
+duration_minutes <= 240,5244558,1180,75.97

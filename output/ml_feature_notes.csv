@@ -1,0 +1,16 @@
+column,note
+trip_miles,possible feature
+trip_seconds,possible feature
+duration_minutes,possible feature
+month,possible feature
+day_of_week,possible feature
+hour,possible feature
+is_weekend,possible feature
+pickup_community_area,possible feature
+dropoff_community_area,possible feature
+payment_type,possible feature
+company,possible feature
+trip_total,do not use for fare prediction
+tips,do not use for fare prediction
+tolls,do not use for fare prediction
+extras,do not use for fare prediction

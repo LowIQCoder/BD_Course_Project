@@ -1,0 +1,25 @@
+SET
+    table_name     | row_count 
+-------------------+-----------
+ staging_raw_trips |  19866157
+ dim_taxi          |      7666
+ dim_company       |        59
+ dim_payment_type  |         8
+ fact_trips        |  19863224
+(5 rows)
+
+    min_start_ts     |    max_start_ts     
+---------------------+---------------------
+ 2016-01-01 00:00:00 | 2016-12-31 23:45:00
+(1 row)
+
+ invalid_end_ts_rows 
+---------------------
+                2434
+(1 row)
+
+ invalid_duration_rows 
+-----------------------
+               1638243
+(1 row)
+

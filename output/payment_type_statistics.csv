@@ -1,0 +1,8 @@
+payment_type,trips,avg_fare,median_fare,avg_tip,avg_trip_total
+Cash,2818277,12.24,8.5,0.0,13.11
+Credit Card,2395152,16.82,10.0,3.64,21.95
+No Charge,20237,12.98,8.75,0.0,13.88
+Unknown,5490,11.41,11.5,0.41,12.09
+Dispute,3228,14.68,9.0,0.0,16.27
+Prcard,1108,11.01,8.5,0.19,11.44
+Pcard,1066,12.04,9.5,0.46,12.87

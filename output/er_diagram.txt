@@ -1,0 +1,48 @@
+staging_raw_trips
+    |
+    | transforms into
+    v
+dim_taxi (taxi_id PK) -------------------\
+                                          \
+dim_company (company_code PK) -------------> fact_trips
+                                            - trip_id PK
+                                            - taxi_id FK -> dim_taxi.taxi_id
+                                            - company_code FK -> dim_company.company_code
+                                            - payment_type FK -> dim_payment_type.payment_type
+                                            - trip_start_timestamp
+                                            - trip_end_timestamp
+                                            - trip_seconds
+                                            - trip_miles
+                                            - pickup_census_tract
+                                            - dropoff_census_tract
+                                            - pickup_community_area
+                                            - dropoff_community_area
+                                            - fare
+                                            - tips
+                                            - tolls
+                                            - extras
+                                            - trip_total
+                                            - pickup_latitude_code
+                                            - pickup_longitude_code
+                                            - dropoff_latitude_code
+                                            - dropoff_longitude_code
+                                            - trip_year
+                                            - trip_month
+                                            - trip_day
+                                            - trip_hour
+                                            - trip_weekday
+                                            - is_valid_end_timestamp
+                                            - is_valid_duration
+                                            - is_valid_amounts
+
+dim_payment_type (payment_type PK) ------/
+
+fact_trips
+    |
+    | basic cleaning
+    v
+fact_trips_clean
+    |
+    | stronger filtering for analytics
+    v
+fact_trips_analytics

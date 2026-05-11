@@ -1,0 +1,5 @@
+file,path,size_mb
+chicago_taxi_trips_2016_01.csv,/kaggle/input/datasets/organizations/chicago/chicago-taxi-rides-2016/chicago_taxi_trips_2016_01.csv,175.88
+chicago_taxi_trips_2016_04.csv,/kaggle/input/datasets/organizations/chicago/chicago-taxi-rides-2016/chicago_taxi_trips_2016_04.csv,201.93
+chicago_taxi_trips_2016_07.csv,/kaggle/input/datasets/organizations/chicago/chicago-taxi-rides-2016/chicago_taxi_trips_2016_07.csv,181.45
+chicago_taxi_trips_2016_10.csv,/kaggle/input/datasets/organizations/chicago/chicago-taxi-rides-2016/chicago_taxi_trips_2016_10.csv,159.78

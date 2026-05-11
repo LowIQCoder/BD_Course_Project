@@ -1,0 +1,13 @@
+{
+  "type" : "record",
+  "name" : "dim_company",
+  "doc" : "Sqoop import of dim_company",
+  "fields" : [ {
+    "name" : "company_code",
+    "type" : [ "null", "int" ],
+    "default" : null,
+    "columnName" : "company_code",
+    "sqlType" : "4"
+  } ],
+  "tableName" : "dim_company"
+}

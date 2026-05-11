@@ -1,0 +1,181 @@
+{
+  "type" : "record",
+  "name" : "fact_trips",
+  "doc" : "Sqoop import of fact_trips",
+  "fields" : [ {
+    "name" : "trip_id",
+    "type" : [ "null", "long" ],
+    "default" : null,
+    "columnName" : "trip_id",
+    "sqlType" : "-5"
+  }, {
+    "name" : "taxi_id",
+    "type" : [ "null", "int" ],
+    "default" : null,
+    "columnName" : "taxi_id",
+    "sqlType" : "4"
+  }, {
+    "name" : "company_code",
+    "type" : [ "null", "int" ],
+    "default" : null,
+    "columnName" : "company_code",
+    "sqlType" : "4"
+  }, {
+    "name" : "payment_type",
+    "type" : [ "null", "string" ],
+    "default" : null,
+    "columnName" : "payment_type",
+    "sqlType" : "12"
+  }, {
+    "name" : "trip_start_timestamp",
+    "type" : [ "null", "long" ],
+    "default" : null,
+    "columnName" : "trip_start_timestamp",
+    "sqlType" : "93"
+  }, {
+    "name" : "trip_end_timestamp",
+    "type" : [ "null", "long" ],
+    "default" : null,
+    "columnName" : "trip_end_timestamp",
+    "sqlType" : "93"
+  }, {
+    "name" : "trip_seconds",
+    "type" : [ "null", "int" ],
+    "default" : null,
+    "columnName" : "trip_seconds",
+    "sqlType" : "4"
+  }, {
+    "name" : "trip_miles",
+    "type" : [ "null", "string" ],
+    "default" : null,
+    "columnName" : "trip_miles",
+    "sqlType" : "2"
+  }, {
+    "name" : "pickup_census_tract",
+    "type" : [ "null", "int" ],
+    "default" : null,
+    "columnName" : "pickup_census_tract",
+    "sqlType" : "4"
+  }, {
+    "name" : "dropoff_census_tract",
+    "type" : [ "null", "int" ],
+    "default" : null,
+    "columnName" : "dropoff_census_tract",
+    "sqlType" : "4"
+  }, {
+    "name" : "pickup_community_area",
+    "type" : [ "null", "int" ],
+    "default" : null,
+    "columnName" : "pickup_community_area",
+    "sqlType" : "4"
+  }, {
+    "name" : "dropoff_community_area",
+    "type" : [ "null", "int" ],
+    "default" : null,
+    "columnName" : "dropoff_community_area",
+    "sqlType" : "4"
+  }, {
+    "name" : "fare",
+    "type" : [ "null", "string" ],
+    "default" : null,
+    "columnName" : "fare",
+    "sqlType" : "2"
+  }, {
+    "name" : "tips",
+    "type" : [ "null", "string" ],
+    "default" : null,
+    "columnName" : "tips",
+    "sqlType" : "2"
+  }, {
+    "name" : "tolls",
+    "type" : [ "null", "string" ],
+    "default" : null,
+    "columnName" : "tolls",
+    "sqlType" : "2"
+  }, {
+    "name" : "extras",
+    "type" : [ "null", "string" ],
+    "default" : null,
+    "columnName" : "extras",
+    "sqlType" : "2"
+  }, {
+    "name" : "trip_total",
+    "type" : [ "null", "string" ],
+    "default" : null,
+    "columnName" : "trip_total",
+    "sqlType" : "2"
+  }, {
+    "name" : "pickup_latitude_code",
+    "type" : [ "null", "int" ],
+    "default" : null,
+    "columnName" : "pickup_latitude_code",
+    "sqlType" : "4"
+  }, {
+    "name" : "pickup_longitude_code",
+    "type" : [ "null", "int" ],
+    "default" : null,
+    "columnName" : "pickup_longitude_code",
+    "sqlType" : "4"
+  }, {
+    "name" : "dropoff_latitude_code",
+    "type" : [ "null", "int" ],
+    "default" : null,
+    "columnName" : "dropoff_latitude_code",
+    "sqlType" : "4"
+  }, {
+    "name" : "dropoff_longitude_code",
+    "type" : [ "null", "int" ],
+    "default" : null,
+    "columnName" : "dropoff_longitude_code",
+    "sqlType" : "4"
+  }, {
+    "name" : "trip_year",
+    "type" : [ "null", "int" ],
+    "default" : null,
+    "columnName" : "trip_year",
+    "sqlType" : "4"
+  }, {
+    "name" : "trip_month",
+    "type" : [ "null", "int" ],
+    "default" : null,
+    "columnName" : "trip_month",
+    "sqlType" : "4"
+  }, {
+    "name" : "trip_day",
+    "type" : [ "null", "int" ],
+    "default" : null,
+    "columnName" : "trip_day",
+    "sqlType" : "4"
+  }, {
+    "name" : "trip_hour",
+    "type" : [ "null", "int" ],
+    "default" : null,
+    "columnName" : "trip_hour",
+    "sqlType" : "4"
+  }, {
+    "name" : "trip_weekday",
+    "type" : [ "null", "int" ],
+    "default" : null,
+    "columnName" : "trip_weekday",
+    "sqlType" : "4"
+  }, {
+    "name" : "is_valid_end_timestamp",
+    "type" : [ "null", "boolean" ],
+    "default" : null,
+    "columnName" : "is_valid_end_timestamp",
+    "sqlType" : "-7"
+  }, {
+    "name" : "is_valid_duration",
+    "type" : [ "null", "boolean" ],
+    "default" : null,
+    "columnName" : "is_valid_duration",
+    "sqlType" : "-7"
+  }, {
+    "name" : "is_valid_amounts",
+    "type" : [ "null", "boolean" ],
+    "default" : null,
+    "columnName" : "is_valid_amounts",
+    "sqlType" : "-7"
+  } ],
+  "tableName" : "fact_trips"
+}

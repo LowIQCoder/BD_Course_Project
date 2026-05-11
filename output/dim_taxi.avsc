@@ -1,0 +1,13 @@
+{
+  "type" : "record",
+  "name" : "dim_taxi",
+  "doc" : "Sqoop import of dim_taxi",
+  "fields" : [ {
+    "name" : "taxi_id",
+    "type" : [ "null", "int" ],
+    "default" : null,
+    "columnName" : "taxi_id",
+    "sqlType" : "4"
+  } ],
+  "tableName" : "dim_taxi"
+}

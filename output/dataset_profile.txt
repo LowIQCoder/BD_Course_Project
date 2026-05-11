@@ -1,0 +1,100 @@
+DATASET PROFILE
+======================================================================
+Folder: data/archive
+CSV files: 12
+Total size: 2.02 GB (2170926889 bytes)
+Passes 500MB requirement: True
+Total rows: 19866157
+Total columns: 20
+
+FILES
+----------------------------------------------------------------------
+chicago_taxi_trips_2016_01.csv: rows=1705805, size=175.88 MB (184423109 bytes)
+chicago_taxi_trips_2016_02.csv: rows=1751192, size=180.87 MB (189657705 bytes)
+chicago_taxi_trips_2016_03.csv: rows=1975108, size=204.22 MB (214139224 bytes)
+chicago_taxi_trips_2016_04.csv: rows=1952152, size=201.93 MB (211736753 bytes)
+chicago_taxi_trips_2016_05.csv: rows=1943584, size=201.41 MB (211196193 bytes)
+chicago_taxi_trips_2016_06.csv: rows=1934479, size=200.76 MB (210509642 bytes)
+chicago_taxi_trips_2016_07.csv: rows=1745387, size=181.45 MB (190262071 bytes)
+chicago_taxi_trips_2016_08.csv: rows=1523947, size=159.01 MB (166738011 bytes)
+chicago_taxi_trips_2016_09.csv: rows=1294020, size=135.49 MB (142068451 bytes)
+chicago_taxi_trips_2016_10.csv: rows=1499771, size=159.78 MB (167544420 bytes)
+chicago_taxi_trips_2016_11.csv: rows=1295000, size=137.68 MB (144370403 bytes)
+chicago_taxi_trips_2016_12.csv: rows=1245712, size=131.87 MB (138280907 bytes)
+
+COLUMNS
+----------------------------------------------------------------------
+taxi_id
+trip_start_timestamp
+trip_end_timestamp
+trip_seconds
+trip_miles
+pickup_census_tract
+dropoff_census_tract
+pickup_community_area
+dropoff_community_area
+fare
+tips
+tolls
+extras
+trip_total
+payment_type
+company
+pickup_latitude
+pickup_longitude
+dropoff_latitude
+dropoff_longitude
+
+NULL STATISTICS
+----------------------------------------------------------------------
+taxi_id: missing=2933 (0.0148%)
+trip_start_timestamp: missing=0 (0.0%)
+trip_end_timestamp: missing=2413 (0.0121%)
+trip_seconds: missing=3215 (0.0162%)
+trip_miles: missing=232 (0.0012%)
+pickup_census_tract: missing=19866157 (100.0%)
+dropoff_census_tract: missing=7734854 (38.9348%)
+pickup_community_area: missing=2755980 (13.8727%)
+dropoff_community_area: missing=3086050 (15.5342%)
+fare: missing=300 (0.0015%)
+tips: missing=300 (0.0015%)
+tolls: missing=300 (0.0015%)
+extras: missing=300 (0.0015%)
+trip_total: missing=300 (0.0015%)
+payment_type: missing=0 (0.0%)
+company: missing=7635894 (38.4367%)
+pickup_latitude: missing=2755600 (13.8708%)
+pickup_longitude: missing=2755600 (13.8708%)
+dropoff_latitude: missing=3047662 (15.341%)
+dropoff_longitude: missing=3047662 (15.341%)
+
+DATETIME SUMMARY
+----------------------------------------------------------------------
+trip_start_timestamp: parsed_count=19866157, min=2016-01-01 00:00:00, max=2016-12-31 23:45:00
+trip_end_timestamp: parsed_count=19863744, min=1900-01-01 00:00:00, max=2017-01-01 01:30:00
+
+NUMERIC SUMMARY
+----------------------------------------------------------------------
+taxi_id: count=19863224, min=0.0, max=8762.0, mean=4372.7109028725645
+trip_seconds: count=19862942, min=0.0, max=86399.0, mean=767.0162477945111
+trip_miles: count=19865925, min=0.0, max=3353.1, mean=3.394263289023794
+dropoff_census_tract: count=12131303, min=0.0, max=1141.0, mean=522.8234286127384
+pickup_community_area: count=17110177, min=1.0, max=77.0, mean=23.680362161069404
+dropoff_community_area: count=16780107, min=1.0, max=77.0, mean=21.759381927659938
+fare: count=19865857, min=0.0, max=9999.0, mean=13.89048349034225
+tips: count=19865857, min=0.0, max=496.5, mean=1.6447692591364165
+tolls: count=19865857, min=0.0, max=999.99, mean=0.003279728631893402
+extras: count=19865857, min=0.0, max=9993.41, mean=1.0400907602425606
+trip_total: count=19865857, min=0.0, max=9999.0, mean=16.62857499527959
+pickup_latitude: count=17110557, min=0.0, max=785.0, mean=391.4733454322966
+pickup_longitude: count=17110557, min=1.0, max=785.0, mean=435.5365528427859
+dropoff_latitude: count=16818495, min=0.0, max=785.0, mean=400.05250142774366
+dropoff_longitude: count=16818495, min=0.0, max=785.0, mean=436.6187329484594
+
+SAMPLE ROWS
+----------------------------------------------------------------------
+{"taxi_id": 85, "trip_start_timestamp": "2016-1-13 06:15:00", "trip_end_timestamp": "2016-1-13 06:15:00", "trip_seconds": 180, "trip_miles": 0.4, "pickup_census_tract": NaN, "dropoff_census_tract": NaN, "pickup_community_area": 24.0, "dropoff_community_area": 24.0, "fare": 4.5, "tips": 0.0, "tolls": 0.0, "extras": 0.0, "trip_total": 4.5, "payment_type": "Cash", "company": 107.0, "pickup_latitude": 199.0, "pickup_longitude": 510.0, "dropoff_latitude": 199.0, "dropoff_longitude": 510.0}
+{"taxi_id": 2776, "trip_start_timestamp": "2016-1-22 09:30:00", "trip_end_timestamp": "2016-1-22 09:45:00", "trip_seconds": 240, "trip_miles": 0.7, "pickup_census_tract": NaN, "dropoff_census_tract": NaN, "pickup_community_area": NaN, "dropoff_community_area": NaN, "fare": 4.45, "tips": 4.45, "tolls": 0.0, "extras": 0.0, "trip_total": 8.9, "payment_type": "Credit Card", "company": NaN, "pickup_latitude": NaN, "pickup_longitude": NaN, "dropoff_latitude": NaN, "dropoff_longitude": NaN}
+{"taxi_id": 3168, "trip_start_timestamp": "2016-1-31 21:30:00", "trip_end_timestamp": "2016-1-31 21:30:00", "trip_seconds": 0, "trip_miles": 0.0, "pickup_census_tract": NaN, "dropoff_census_tract": NaN, "pickup_community_area": NaN, "dropoff_community_area": NaN, "fare": 42.75, "tips": 5.0, "tolls": 0.0, "extras": 0.0, "trip_total": 47.75, "payment_type": "Credit Card", "company": 119.0, "pickup_latitude": NaN, "pickup_longitude": NaN, "dropoff_latitude": NaN, "dropoff_longitude": NaN}
+{"taxi_id": 4237, "trip_start_timestamp": "2016-1-23 17:30:00", "trip_end_timestamp": "2016-1-23 17:30:00", "trip_seconds": 480, "trip_miles": 1.1, "pickup_census_tract": NaN, "dropoff_census_tract": NaN, "pickup_community_area": 6.0, "dropoff_community_area": 6.0, "fare": 7.0, "tips": 0.0, "tolls": 0.0, "extras": 0.0, "trip_total": 7.0, "payment_type": "Cash", "company": NaN, "pickup_latitude": 686.0, "pickup_longitude": 500.0, "dropoff_latitude": 686.0, "dropoff_longitude": 500.0}
+{"taxi_id": 5710, "trip_start_timestamp": "2016-1-14 05:45:00", "trip_end_timestamp": "2016-1-14 06:00:00", "trip_seconds": 480, "trip_miles": 2.71, "pickup_census_tract": NaN, "dropoff_census_tract": NaN, "pickup_community_area": 32.0, "dropoff_community_area": NaN, "fare": 10.25, "tips": 0.0, "tolls": 0.0, "extras": 0.0, "trip_total": 10.25, "payment_type": "Cash", "company": NaN, "pickup_latitude": 385.0, "pickup_longitude": 478.0, "dropoff_latitude": NaN, "dropoff_longitude": NaN}

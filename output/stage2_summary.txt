@@ -1,0 +1,10 @@
+Stage 2 summary
+
+External Hive tables were created over the Sqoop-imported Avro files in HDFS.
+A cleaned analytical Hive table taxi_trips_part_bucket was created using partitioning by trip_month and bucketing by pickup_community_area.
+Because of the 20 GB HDFS quota, the Hive EDA table uses four representative months: 1, 4, 7, and 10.
+The final analytical table contains 5,244,122 cleaned trips.
+Fifteen HiveQL EDA queries were executed.
+Their results were stored in q1_results to q15_results and exported to HDFS under project/output/q1 to project/output/q15.
+The exported CSV files and chart images are stored in the local output folder.
+Superset charts were created for q1_results to q15_results.

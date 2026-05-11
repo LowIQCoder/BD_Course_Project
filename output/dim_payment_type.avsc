@@ -1,0 +1,13 @@
+{
+  "type" : "record",
+  "name" : "dim_payment_type",
+  "doc" : "Sqoop import of dim_payment_type",
+  "fields" : [ {
+    "name" : "payment_type",
+    "type" : [ "null", "string" ],
+    "default" : null,
+    "columnName" : "payment_type",
+    "sqlType" : "12"
+  } ],
+  "tableName" : "dim_payment_type"
+}
