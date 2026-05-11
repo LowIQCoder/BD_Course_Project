@@ -57,5 +57,5 @@ main.sh                       # Main script
 
 * Marsel Berheev (m.berheev@innopolis.university) - ML Specialist
 * Vlad Strelkov (vl.strelkov@innopolis.uniceristy) - Tester and Technical Writer
-* Makar Egorov () - Data Engineer
+* Makar Egorov (makar.egorov.04@mail.ru) - Data Engineer
 * Rail Sharipov () - Data Sciencist
