@@ -74,6 +74,14 @@ CREATE TABLE fact_trips (
     is_valid_amounts          BOOLEAN NOT NULL
 );
 
+
+
+ALTER TABLE fact_trips
+ADD CONSTRAINT fk_fact_taxi
+FOREIGN KEY (taxi_id)
+REFERENCES dim_taxi(taxi_id);
+
+
 CREATE INDEX idx_fact_trips_start_ts ON fact_trips (trip_start_timestamp);
 CREATE INDEX idx_fact_trips_payment_type ON fact_trips (payment_type);
 CREATE INDEX idx_fact_trips_company_code ON fact_trips (company_code);

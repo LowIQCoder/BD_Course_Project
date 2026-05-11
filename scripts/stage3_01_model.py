@@ -87,6 +87,16 @@ for col_name in CATEGORICAL_COLS:
         F.coalesce(F.col(col_name).cast("string"), F.lit("missing")),
     )
 
+data = data.withColumn(
+    "payment_type",
+    F.when(F.lower(F.trim(F.col("payment_type"))) == "cash", F.lit("Cash"))
+    .when(
+        F.lower(F.trim(F.col("payment_type"))) == "credit card",
+        F.lit("Credit Card"),
+    )
+    .otherwise(F.lit("other")),
+)
+
 month_value = 2.0 * math.pi * F.col("trip_month").cast("double") / F.lit(12.0)
 day_value = 2.0 * math.pi * F.col("trip_day").cast("double") / F.lit(31.0)
 hour_value = 2.0 * math.pi * F.col("trip_hour").cast("double") / F.lit(24.0)
@@ -103,7 +113,13 @@ data = data.withColumn("trip_weekday_cos", F.cos(weekday_value))
 
 data = data.select(["label"] + NUMERIC_COLS + BOOLEAN_COLS + CYCLE_COLS + CATEGORICAL_COLS)
 data = data.where((F.col("label").isNotNull()) & (F.col("label") > 0.0))
-data = data.orderBy(F.rand(42)).limit(args.sample_size).cache()
+small_fare_limit = max(1, args.sample_size // 5)
+other_fare_limit = max(0, args.sample_size - small_fare_limit)
+
+print("Sampling records with small fare cap:", small_fare_limit)
+small_fares = data.where(F.col("label") <= 5.0).orderBy(F.rand(42)).limit(small_fare_limit)
+other_fares = data.where(F.col("label") > 5.0).orderBy(F.rand(43)).limit(other_fare_limit)
+data = small_fares.unionByName(other_fares).orderBy(F.rand(44)).cache()
 print("Sampled records:", data.count())
 
 print("Splitting data")
@@ -165,6 +181,21 @@ dt_grid = (
     .addGrid(dt.maxDepth, [5, 10])
     .addGrid(dt.minInstancesPerNode, [1, 5])
     .build()
+)
+
+cv_grid_rows = []
+for model_name, param_grid in [
+    ("LinearRegression", lr_grid),
+    ("RandomForestRegressor", rf_grid),
+    ("DecisionTreeRegressor", dt_grid),
+]:
+    for grid_id, param_map in enumerate(param_grid):
+        for param, value in sorted(param_map.items(), key=lambda item: item[0].name):
+            cv_grid_rows.append([model_name, grid_id, param.name, str(value)])
+
+cv_parameter_grids = spark.createDataFrame(
+    cv_grid_rows,
+    ["model", "grid_id", "parameter", "value"],
 )
 
 print("Training default Linear Regression model")
@@ -282,49 +313,6 @@ best_model_parameters = spark.createDataFrame(
     ["model", "parameter", "value"],
 )
 
-print("Predicting fare for real world example")
-example_data = spark.createDataFrame(
-    [[720.0, 3.4, 2026, 5, 11, 2, 1, "Cash", None, None, True, True, True]],
-    "trip_seconds double, trip_miles double, trip_year int, trip_month int, "
-    "trip_day int, trip_hour int, trip_weekday int, payment_type string, "
-    "pickup_community_area string, dropoff_community_area string, "
-    "is_valid_end_timestamp boolean, is_valid_duration boolean, "
-    "is_valid_amounts boolean",
-)
-
-for col_name in NUMERIC_COLS:
-    example_data = example_data.withColumn(col_name, F.col(col_name).cast("double"))
-
-for col_name in BOOLEAN_COLS:
-    example_data = example_data.withColumn(
-        col_name,
-        F.when(F.col(col_name).cast("boolean"), 1.0).otherwise(0.0),
-    )
-
-for col_name in CATEGORICAL_COLS:
-    example_data = example_data.withColumn(
-        col_name,
-        F.coalesce(F.col(col_name).cast("string"), F.lit("missing")),
-    )
-
-example_month_value = 2.0 * math.pi * F.col("trip_month").cast("double") / F.lit(12.0)
-example_day_value = 2.0 * math.pi * F.col("trip_day").cast("double") / F.lit(31.0)
-example_hour_value = 2.0 * math.pi * F.col("trip_hour").cast("double") / F.lit(24.0)
-example_weekday_value = 2.0 * math.pi * F.col("trip_weekday").cast("double") / F.lit(7.0)
-
-example_data = example_data.withColumn("trip_month_sin", F.sin(example_month_value))
-example_data = example_data.withColumn("trip_month_cos", F.cos(example_month_value))
-example_data = example_data.withColumn("trip_day_sin", F.sin(example_day_value))
-example_data = example_data.withColumn("trip_day_cos", F.cos(example_day_value))
-example_data = example_data.withColumn("trip_hour_sin", F.sin(example_hour_value))
-example_data = example_data.withColumn("trip_hour_cos", F.cos(example_hour_value))
-example_data = example_data.withColumn("trip_weekday_sin", F.sin(example_weekday_value))
-example_data = example_data.withColumn("trip_weekday_cos", F.cos(example_weekday_value))
-example_data = example_data.select(NUMERIC_COLS + BOOLEAN_COLS + CYCLE_COLS + CATEGORICAL_COLS)
-example_ready = feature_model.transform(example_data).select("features")
-example_prediction = best_model.transform(example_ready).select("prediction").first()[0]
-print(f"Real world example predicted fare: {example_prediction:.4f}")
-
 rows = [
     ["LinearRegression", metrics1["rmse"], metrics1["mae"], metrics1["r2"]],
     ["RandomForestRegressor", metrics2["rmse"], metrics2["mae"], metrics2["r2"]],
@@ -332,7 +320,6 @@ rows = [
 ]
 evaluation = spark.createDataFrame(rows, ["model", "RMSE", "MAE", "R2"])
 evaluation.show(truncate=False)
-evaluation
 
 evaluation_hive = spark.createDataFrame(rows, ["model", "rmse", "mae", "r2"])
 predictions_hive = predictions1.select(
@@ -362,6 +349,9 @@ predictions_hive.write.mode("overwrite").format("parquet").saveAsTable(
 )
 best_model_parameters.write.mode("overwrite").format("parquet").saveAsTable(
     "team27_projectdb.pda_best_model_parameters"
+)
+cv_parameter_grids.write.mode("overwrite").format("parquet").saveAsTable(
+    "team27_projectdb.pda_cv_parameter_grids"
 )
 
 print("Saving train and test datasets")

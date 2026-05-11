@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 #!/bin/bash
 start=$SECONDS
+rm output/execution_times.txt
 mkdir -p ~/bigdata-final-project/data/archive/
 
 curl -L -o ~/bigdata-final-project/data/archive/chicago-taxi-rides-2016.zip\
