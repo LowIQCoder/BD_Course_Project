@@ -1,3 +1,6 @@
+"""
+Prepares data, performs Cross Validation on 3 different models, and save results
+"""
 import argparse
 import math
 import os
@@ -170,11 +173,10 @@ lr_default_predictions = lr_default_model.transform(test_ready)
 lr_default_rmse = rmse_evaluator.evaluate(lr_default_predictions)
 lr_default_mae = mae_evaluator.evaluate(lr_default_predictions)
 lr_default_r2 = r2_evaluator.evaluate(lr_default_predictions)
-print("LinearRegression default RMSE={:.4f}, MAE={:.4f}, R2={:.4f}".format(
-    lr_default_rmse,
-    lr_default_mae,
-    lr_default_r2,
-))
+print(
+    f"LinearRegression default RMSE={lr_default_rmse:.4f}, "
+    f"MAE={lr_default_mae:.4f}, R2={lr_default_r2:.4f}"
+)
 
 print("Starting CV for Linear Regression model")
 lr_cv = CrossValidator(
@@ -202,11 +204,10 @@ rf_default_predictions = rf_default_model.transform(test_ready)
 rf_default_rmse = rmse_evaluator.evaluate(rf_default_predictions)
 rf_default_mae = mae_evaluator.evaluate(rf_default_predictions)
 rf_default_r2 = r2_evaluator.evaluate(rf_default_predictions)
-print("RandomForestRegressor default RMSE={:.4f}, MAE={:.4f}, R2={:.4f}".format(
-    rf_default_rmse,
-    rf_default_mae,
-    rf_default_r2,
-))
+print(
+    f"RandomForestRegressor default RMSE={rf_default_rmse:.4f}, "
+    f"MAE={rf_default_mae:.4f}, R2={rf_default_r2:.4f}"
+)
 
 print("Starting CV for Random Forest model")
 rf_cv = CrossValidator(
@@ -234,11 +235,10 @@ dt_default_predictions = dt_default_model.transform(test_ready)
 dt_default_rmse = rmse_evaluator.evaluate(dt_default_predictions)
 dt_default_mae = mae_evaluator.evaluate(dt_default_predictions)
 dt_default_r2 = r2_evaluator.evaluate(dt_default_predictions)
-print("DecisionTreeRegressor default RMSE={:.4f}, MAE={:.4f}, R2={:.4f}".format(
-    dt_default_rmse,
-    dt_default_mae,
-    dt_default_r2,
-))
+print(
+    f"DecisionTreeRegressor default RMSE={dt_default_rmse:.4f}, "
+    f"MAE={dt_default_mae:.4f}, R2={dt_default_r2:.4f}"
+)
 
 print("Starting CV for Decision Tree model")
 dt_cv = CrossValidator(
@@ -323,7 +323,7 @@ example_data = example_data.withColumn("trip_weekday_cos", F.cos(example_weekday
 example_data = example_data.select(NUMERIC_COLS + BOOLEAN_COLS + CYCLE_COLS + CATEGORICAL_COLS)
 example_ready = feature_model.transform(example_data).select("features")
 example_prediction = best_model.transform(example_ready).select("prediction").first()[0]
-print("Real world example predicted fare: {:.4f}".format(example_prediction))
+print(f"Real world example predicted fare: {example_prediction:.4f}")
 
 rows = [
     ["LinearRegression", metrics1["rmse"], metrics1["mae"], metrics1["r2"]],

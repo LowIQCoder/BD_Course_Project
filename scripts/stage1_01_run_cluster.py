@@ -1,3 +1,6 @@
+"""
+Creates and populates database
+"""
 import glob
 import os
 import zipfile
@@ -8,12 +11,10 @@ PGPORT = 5432
 PGDATABASE = "team27_projectdb"
 PGUSER = "team27"
 
-with open("secrets/.psql.pass", "r") as f:
+with open("secrets/.psql.pass", mode='r', encoding='utf-8') as f:
     PGPASSWORD = f.read().strip()
 
 os.makedirs("data/archive", exist_ok=True)
-
-
 
 stage_files = {
     "chicago_taxi_trips_2016_01.csv",
@@ -58,13 +59,13 @@ conn.autocommit = False
 cur = conn.cursor()
 
 print("Running schema creation...")
-with open("sql/stage1_01_schema_cluster.sql", "r") as f:
+with open("sql/stage1_01_schema_cluster.sql", mode='r', encoding='utf-8') as f:
     cur.execute(f.read())
 conn.commit()
 
 print("Loading CSV files into staging table...")
 
-copy_sql = """
+COPY_SQL = """
 COPY chicago_taxi.staging_raw_trips
 FROM STDIN
 WITH (FORMAT csv, HEADER true)
@@ -73,17 +74,17 @@ WITH (FORMAT csv, HEADER true)
 for path in files:
     print(f"Loading {path} ...")
     with open(path, "r", encoding="utf-8") as infile:
-        cur.copy_expert(copy_sql, infile)
+        cur.copy_expert(COPY_SQL, infile)
 
 conn.commit()
 
 print("Transforming staging data into dimensions and fact table...")
-with open("sql/stage1_02_transform.sql", "r") as f:
+with open("sql/stage1_02_transform.sql", mode='r', encoding='utf-8') as f:
     cur.execute(f.read())
 conn.commit()
 
 print("Running verification queries...")
-with open("sql/stage1_03_verify.sql", "r") as f:
+with open("sql/stage1_03_verify.sql", mode='r', encoding='utf-8') as f:
     cur.execute(f.read())
 
     try:
@@ -92,7 +93,7 @@ with open("sql/stage1_03_verify.sql", "r") as f:
                 print(cur.fetchall())
             if not cur.nextset():
                 break
-    except Exception:
+    except psycopg2.Error:
         pass
 
 cur.close()
