@@ -332,6 +332,7 @@ rows = [
 ]
 evaluation = spark.createDataFrame(rows, ["model", "RMSE", "MAE", "R2"])
 evaluation.show(truncate=False)
+evaluation
 
 evaluation_hive = spark.createDataFrame(rows, ["model", "rmse", "mae", "r2"])
 predictions_hive = predictions1.select(

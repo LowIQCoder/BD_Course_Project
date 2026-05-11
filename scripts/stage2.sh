@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+start=$SECONDS
+
 cd "$(dirname "$0")/.."
 
 password=$(head -n 1 secrets/.hive.pass)
@@ -20,24 +22,55 @@ run_hive() {
   fi
   beeline -u "$url" -n "$user" -p "$password" -f "$file" > "$out" 2>&1
 }
-
+echo "Storage setup"
 run_hive "sql/stage2_00_storage_setup.sql" "output/hive_results.txt"
+
+echo "Executing q1"
 run_hive "sql/stage2_01_monthly_metrics.sql"
+
+echo "Executing q2"
 run_hive "sql/stage2_02_weekday_hour_demand.sql"
+
+echo "Executing q3"
 run_hive "sql/stage2_03_distance_fare_distribution.sql"
+
+echo "Executing q4"
 run_hive "sql/stage2_04_pickup_community_metrics.sql"
+
+echo "Executing q5"
 run_hive "sql/stage2_05_dropoff_community_metrics.sql"
+
+echo "Executing q6"
 run_hive "sql/stage2_06_payment_type_metrics.sql"
+
+echo "Executing q7"
 run_hive "sql/stage2_07_fare_bins.sql"
+
+echo "Executing q8"
 run_hive "sql/stage2_08_correlation_matrix.sql"
+
+echo "Executing q9"
 run_hive "sql/stage2_09_pickup_heatmap.sql"
+
+echo "Executing q10"
 run_hive "sql/stage2_10_od_community_flows.sql"
+
+echo "Executing q11"
 run_hive "sql/stage2_11_hourly_fare_metrics.sql"
+
+echo "Executing q12"
 run_hive "sql/stage2_12_distance_fare_bins.sql"
+
+echo "Executing q13"
 run_hive "sql/stage2_13_speed_by_hour.sql"
+
+echo "Executing q14"
 run_hive "sql/stage2_14_fare_per_mile.sql"
+
+echo "Executing q15"
 run_hive "sql/stage2_15_missing_values.sql"
 
+echo "Saving data to hdfs"
 echo "month,trips,avg_fare,avg_trip_miles" > "output/q1.csv"
 hdfs dfs -cat "project/output/q1"/* >> "output/q1.csv"
 
@@ -82,3 +115,9 @@ hdfs dfs -cat "project/output/q14"/* >> "output/q14.csv"
 
 echo "column_name,missing_count,missing_pct" > "output/q15.csv"
 hdfs dfs -cat "project/output/q15"/* >> "output/q15.csv"
+
+duration=$(( SECONDS - start ))
+echo "Stage II finished successfully. Execution time: $duration seconds"
+
+echo "Stage II execution time: $duration seconds" >> output/execution_times.txt
+

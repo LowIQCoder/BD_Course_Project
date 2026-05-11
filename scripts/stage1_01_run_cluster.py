@@ -99,4 +99,4 @@ with open("sql/stage1_03_verify.sql", mode='r', encoding='utf-8') as f:
 cur.close()
 conn.close()
 
-print("Stage 1 cluster finished successfully.")
+print("Cluster schema creation and population finished successfully.")
