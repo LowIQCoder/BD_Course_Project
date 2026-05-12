@@ -25,6 +25,12 @@ To run this project you should install all dependencies from `requirements.txt`:
 pip install -r requirements.txt
 ```
 
+And setup some credentials
+```bash
+echo <postgres_key> > secrets/.psql.pass
+echo <hive_key> > secrets/.hive.pass
+```
+
 And after run full pipeline script
 ```bash
 sh main.sh
